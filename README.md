@@ -1,73 +1,79 @@
 
 ---
 
-# 🛡️ Password Generator Pro (Advanced Edition)
+# 🛡️ Password GEN - User Guide
 
-A high-performance, secure, and user-friendly web application for generating robust passwords. The interface features an optimized **dual-column layout** designed for seamless security management.
+**Password GEN** is a modern and secure web application designed to generate robust passwords while providing a smooth, personalized user experience.
 
 ---
 
 ## 🚀 Key Features
 
-### 1. 🔑 High-Security Generation
+### 1. Customized Generation
 
-* **Total Control**: Custom inclusion of lowercase, uppercase, numbers, and symbols.
-* **Precision Slider**: Adjustable length from **8 to 32 characters**.
-* **Ambiguity Exclusion**: Option to remove hard-to-read characters (`i`, `l`, `1`, `L`, `o`, `0`, `O`) to prevent manual entry errors.
+* **Variable Length:** Adjust your password length from **8 to 32 characters** using an intuitive slider.
+* **Character Options:** Choose to include lowercase, uppercase, numbers, and symbols.
+* **Enhanced Security:** An option to exclude ambiguous characters (such as `i, l, 1, L, o, 0, O`) to prevent reading errors.
 
-### 2. 📊 Analysis & Transfer
+### 2. Security Analysis
 
-* **Dynamic Strength Bar**: Real-time evaluation of password entropy (Red = Weak, Yellow = Medium, Green = Strong).
-* **QR Code Generator**: Instantly display a QR code to transfer your password to a smartphone without using the internet.
-* **Auto-Scaling Text**: Font size automatically adjusts so that 32-character passwords always stay on **a single line**.
+* **Strength Bar:** A color-coded progress bar visually indicates password robustness (Red = Weak, Yellow = Medium, Green = Strong).
+* **Crack Time Estimation:** The app calculates in real-time the estimated time required to brute-force your password (e.g., "300 years").
 
-### 3. 🎨 User Experience (UX)
+### 3. Privacy and Ergonomics
 
-* **Dual-Column Interface**: The generator occupies the main section while the history remains accessible on the right (on desktop).
-* **5-Item History**: Quick access to the last 5 generated passwords for instant copying.
-* **Dark Mode**: Elegant toggle with preference memory via `localStorage`.
-* **Bilingual**: Interface available in both English and French.
+* **Mask Password:** Click the **Eye** icon to hide or reveal the generated password (useful in public spaces).
+* **History:** Keep track of the last 5 generated passwords. You can copy them with one click or clear the history for added security.
+* **QR Code:** Instantly generate a QR code to transfer your password to a mobile device without typing.
 
----
+### 4. Intelligent Personalization
 
-## 🛠️ Technical Stack
-
-| Technology | Role |
-| --- | --- |
-| **HTML5** | Semantic structure and responsive layout. |
-| **CSS3** | Dynamic theming, variables, and Grid/Flexbox layout. |
-| **JavaScript (ES6+)** | Generation logic, character filtering, and state management. |
-| **Bootstrap 5.3** | Framework for modern design and interactive components. |
-| **QRCode.js** | Lightweight library for instant text-to-image conversion. |
+* **Dark / Light Mode:** Switch between themes based on your visual preference.
+* **Multilingual:** Full support for French and English.
+* **Automatic Memory:** The app uses local storage to remember your preferred language and theme for your next visit.
 
 ---
 
-## 📂 File Structure
+## 🛠️ How to Use the App
 
-```text
-/
-├── index.html   # Structure, CDNs, and dual-column layout
-├── style.css    # Themes (Light/Dark) and history styling
-└── script.js    # Generation engine and application logic
+1. **Configure Settings:**
+* Use the slider to set the desired length.
+* Check or uncheck character types (Uppercase, Numbers, etc.).
 
-```
 
----
+2. **Generate:**
+* Press the blue **"Generate"** button. The password appears immediately in the gray box.
 
-## ⚙️ Quick Start
 
-1. **Copy** the three files (`index.html`, `style.css`, `script.js`) into a local folder.
-2. **Launch** `index.html` in your web browser.
-* *Note: No server or dependency installation is required.*
+3. **Check Strength:**
+* Look at the color bar and the estimated crack time below it to ensure the password is complex enough.
+
+
+4. **Retrieve the Password:**
+* Click the **Clipboard** icon to copy the text.
+* OR click the **QR Code** icon to scan the password with your phone.
+
+
+5. **Manage History:**
+* Your previous passwords appear on the right (or bottom on mobile). Click any of them to copy it again.
 
 
 
 ---
 
-## 🔒 Security & Privacy
+## 🔒 Security and Privacy
 
-* **100% Client-Side**: Passwords are generated locally within your browser.
-* **Zero Tracking**: No data ever leaves your computer. The QR code transfer is purely visual and local.
-* **Ephemeral**: The history is stored in temporary memory; it is cleared whenever the tab is closed to ensure your privacy.
+* **No Server Storage:** Your passwords are generated locally in your browser. Nothing is sent over the internet.
+* **LocalStorage:** Only your preferences (language and theme) are saved on your computer.
+
+---
+
+## 💡 Tips for a Perfect Password
+
+For maximum security, we recommend:
+
+* A length of at least **14 characters**.
+* Activating all options (lowercase, uppercase, numbers, and symbols).
+* An estimated crack time of several **centuries**.
 
 ---
