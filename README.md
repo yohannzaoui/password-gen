@@ -1,25 +1,14 @@
-# 🛡️ Ultimate Password Generator Pro
+# 🛡️ Password Generator Pro (Ultimate Edition)
 
-A professional, client-side web application designed for high-security password generation with complete user control.
+A professional web application for secure password generation with a built-in strength analyzer.
 
 ## 🚀 Key Features
-- **Total Customization**: Toggle Lowercase, Uppercase, Numbers, and Symbols independently.
-- **Readability First**: "Exclude Ambiguous" filter to remove confusing characters like `1`, `l`, `0`, and `O`.
-- **Dynamic Interface**:
-    - **Dark Mode**: Smooth theme switching using CSS variables.
-    - **Multi-language**: Fully localized in English and French.
-- **Copy to Clipboard**: Fast copy with visual feedback.
-- **Responsive Design**: Built with Bootstrap 5 for seamless use on any device.
-
-## 📁 Files
-- `index.html`: The semantic structure and UI.
-- `style.css`: Modern styling and theme management.
-- `script.js`: Randomization logic and interactive features.
+- **Password Strength Meter**: Real-time analysis with color-coded feedback (Red, Yellow, Green).
+- **One-Click Theme Toggle**: Fast switch between Light and Dark modes.
+- **Fixed Visibility**: CSS variables ensure high contrast in all themes.
+- **Full Customization**: Toggle Lowercase, Uppercase, Numbers, and Symbols independently.
+- **Ambiguous Character Filter**: Avoid confusing characters like `1` and `l`.
 
 ## 🛠️ Installation
-1. Save all three files in the same directory.
-2. Open `index.html` in your favorite browser.
-3. No internet connection required after initial load!
-
-## 🔒 Privacy
-This tool is 100% private. Passwords are generated locally on your machine. No data is collected or transmitted.
+1. Place `index.html`, `style.css`, and `script.js` in the same directory.
+2. Open `index.html` in your browser.
