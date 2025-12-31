@@ -17,14 +17,14 @@ const translations = {
     }
 };
 
-// --- INITIALISATION ---
+// --- ÉTAT INITIAL & STORAGE ---
 let currentLang = localStorage.getItem('lang') || 'fr';
 let fontSizeMultiplier = parseFloat(localStorage.getItem('fontSize')) || 1.0;
 let isHighContrast = localStorage.getItem('contrast') === 'true';
 let passwordHistory = [];
 let isPasswordVisible = true;
 
-// --- FONCTIONS ACCESSIBILITÉ ---
+// --- FONCTIONS D'ACCESSIBILITÉ ---
 function applyFontSize() {
     document.documentElement.style.fontSize = (fontSizeMultiplier * 16) + 'px';
     localStorage.setItem('fontSize', fontSizeMultiplier);
@@ -36,15 +36,17 @@ function applyContrast() {
     } else {
         document.body.classList.remove('high-contrast');
     }
+    // Synchronise la checkbox
     document.getElementById('contrast-toggle').checked = isHighContrast;
     localStorage.setItem('contrast', isHighContrast);
 }
 
+// Événements accessibilité
 document.getElementById('font-increase').onclick = () => { if(fontSizeMultiplier < 1.4) { fontSizeMultiplier += 0.1; applyFontSize(); }};
 document.getElementById('font-decrease').onclick = () => { if(fontSizeMultiplier > 0.8) { fontSizeMultiplier -= 0.1; applyFontSize(); }};
 document.getElementById('contrast-toggle').onchange = (e) => { isHighContrast = e.target.checked; applyContrast(); };
 
-// --- THÈME & TRADUCTION ---
+// --- GESTION THÈME & TRADUCTION ---
 const updateThemeIcon = (theme) => {
     document.getElementById('theme-icon').className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
 };
@@ -69,7 +71,7 @@ function updateUI() {
     document.getElementById('ui-history').innerText = t.history;
     document.getElementById('ui-accessibility').innerText = t.accessibility;
     document.getElementById('ui-text-size').innerText = t.textSize;
-    document.getElementById('ui-contrast').innerText = t.contrast;
+    document.getElementById('ui-contrast').innerText = t.contrast; // Traduction ajoutée ici
     document.getElementById('lang-btn').innerText = currentLang === 'fr' ? 'EN' : 'FR';
     
     const currentPass = document.getElementById('password-display').innerText;
@@ -83,7 +85,7 @@ document.getElementById('lang-btn').onclick = () => {
     updateUI();
 };
 
-// --- LOGIQUE CORE ---
+// --- LOGIQUE GÉNÉRATEUR ---
 function getTimeToCrack(p) {
     let charsetSize = 0;
     if (/[a-z]/.test(p)) charsetSize += 26;
@@ -128,7 +130,7 @@ function renderHistory() {
     document.getElementById('clear-h').onclick = () => { passwordHistory = []; renderHistory(); };
 }
 
-// --- ÉVÉNEMENTS ---
+// --- ÉVÉNEMENTS BOUTONS ---
 document.getElementById('generate-btn').onclick = () => {
     const len = document.getElementById('length-slider').value;
     let pool = "";
@@ -139,10 +141,7 @@ document.getElementById('generate-btn').onclick = () => {
     if (document.getElementById('exclude-ambiguous').checked) pool = pool.replace(/[ilLIoO01]/g, "");
 
     const d = document.getElementById('password-display');
-    if (!pool) {
-        d.innerText = translations[currentLang].error; d.classList.add('text-danger');
-        return;
-    }
+    if (!pool) { d.innerText = translations[currentLang].error; d.classList.add('text-danger'); return; }
 
     let password = "";
     for (let i = 0; i < len; i++) password += pool.charAt(Math.floor(Math.random() * pool.length));
@@ -173,7 +172,7 @@ document.getElementById('copy-btn').onclick = () => {
     setTimeout(() => i.className = 'bi bi-clipboard', 1500);
 };
 
-// --- INIT ---
+// --- INITIALISATION AU CHARGEMENT ---
 window.onload = () => {
     applyFontSize();
     applyContrast();
