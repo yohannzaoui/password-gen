@@ -54,13 +54,18 @@ document.getElementById('dark-mode-btn').onclick = () => {
 function updateUI() {
     const t = translations[currentLang];
     const ids = ['title', 'length', 'lowercase', 'uppercase', 'numbers', 'symbols', 'ambiguous', 'history', 'accessibility', 'textSize', 'contrast'];
-    ids.forEach(id => document.getElementById(`ui-${id}`).innerText = t[id]);
+    ids.forEach(id => {
+        const el = document.getElementById(`ui-${id}`);
+        if(el) el.innerText = t[id];
+    });
     document.getElementById('ui-btn-text').innerText = t.btn;
     document.getElementById('lang-btn').innerText = currentLang === 'fr' ? 'EN' : 'FR';
     
     const currentPass = document.getElementById('password-display').innerText;
     if (!currentPass.includes('*')) updateStrength(currentPass);
-    renderHistory();
+    
+    // Forcer le rendu de l'historique pour traduire le bouton "Vider"
+    renderHistory(); 
 }
 
 document.getElementById('lang-btn').onclick = () => {
@@ -73,6 +78,8 @@ document.getElementById('lang-btn').onclick = () => {
 function renderHistory() {
     const list = document.getElementById('history-list');
     if (passwordHistory.length === 0) { list.innerHTML = ""; return; }
+    
+    // Ici, on utilise translations[currentLang].clear pour que ce soit toujours à jour
     list.innerHTML = passwordHistory.map(p => `
         <div class="history-item" onclick="navigator.clipboard.writeText('${p}')">
             <span class="text-truncate" style="max-width: 80%">${p}</span><i class="bi bi-copy"></i>
@@ -81,7 +88,11 @@ function renderHistory() {
         <button class="btn btn-sm btn-link text-danger mt-3 p-0 d-flex align-items-center gap-1" id="clear-h">
             <i class="bi bi-trash3"></i> ${translations[currentLang].clear}
         </button>`;
-    document.getElementById('clear-h').onclick = () => { passwordHistory = []; renderHistory(); };
+        
+    document.getElementById('clear-h').onclick = () => { 
+        passwordHistory = []; 
+        renderHistory(); 
+    };
 }
 
 function updateStrength(p) {
