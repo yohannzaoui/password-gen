@@ -28,15 +28,9 @@
                 <div class="result-box mb-2">
                     <span id="password-display" aria-live="polite">********</span>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-link p-0 text-decoration-none" id="visibility-toggle">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button class="btn btn-link p-0 text-decoration-none" id="qr-toggle">
-                            <i class="bi bi-qr-code"></i>
-                        </button>
-                        <button class="btn btn-link p-0 text-decoration-none" id="copy-btn">
-                            <i class="bi bi-clipboard"></i>
-                        </button>
+                        <button class="btn btn-link p-0 text-decoration-none" id="visibility-toggle"><i class="bi bi-eye"></i></button>
+                        <button class="btn btn-link p-0 text-decoration-none" id="qr-toggle"><i class="bi bi-qr-code"></i></button>
+                        <button class="btn btn-link p-0 text-decoration-none" id="copy-btn"><i class="bi bi-clipboard"></i></button>
                     </div>
                 </div>
 
@@ -90,7 +84,6 @@
 
         <div class="col-12 col-lg-4">
             <div class="d-flex flex-column h-100 gap-4">
-                
                 <div class="card p-4 shadow-lg border-0 flex-grow-1">
                     <h6 class="small fw-bold mb-3 text-muted text-uppercase" id="ui-history">Historique</h6>
                     <div id="history-list"></div>
@@ -98,7 +91,6 @@
 
                 <div class="card p-4 shadow-lg border-0 accessibility-panel">
                     <label class="fw-bold mb-3 small text-uppercase text-muted" id="ui-accessibility">Accessibilité</label>
-                    
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <span id="ui-text-size" class="small">Taille du texte</span>
                         <div class="btn-group btn-group-sm">
@@ -106,13 +98,11 @@
                             <button class="btn btn-outline-secondary" id="font-increase">A+</button>
                         </div>
                     </div>
-
                     <div class="form-check form-switch mb-0">
                         <input class="form-check-input" type="checkbox" id="contrast-toggle">
                         <label class="form-check-label small" id="ui-contrast" for="contrast-toggle">Contraste élevé</label>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
