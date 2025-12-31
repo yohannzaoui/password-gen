@@ -1,3 +1,4 @@
+/* --- VARIABLES DE BASE (Thèmes Clair/Sombre) --- */
 :root { 
     --bg-body: #f8f9fa; 
     --bg-card: #ffffff; 
@@ -17,52 +18,62 @@
 }
 
 /* --- MODE CONTRASTE ÉLEVÉ (Priorité maximale) --- */
+/* On utilise body.high-contrast pour écraser les styles Bootstrap */
 body.high-contrast {
-    background-color: #000 !important;
-    color: #fff !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
 }
 
 .high-contrast .card, 
 .high-contrast .result-box, 
-.high-contrast .accessibility-panel,
-.high-contrast .list-group-item {
-    background-color: #000 !important;
-    border: 3px solid #fff !important;
-    color: #fff !important;
+.high-contrast .accessibility-panel {
+    background-color: #000000 !important;
+    border: 3px solid #ffffff !important;
+    color: #ffffff !important;
 }
 
 .high-contrast #password-display,
-.high-contrast #length-val {
-    color: #ffff00 !important; /* Jaune vif pour les infos clés */
+.high-contrast #length-val,
+.high-contrast .bi-copy,
+.high-contrast .bi-trash3 {
+    color: #ffff00 !important; /* Jaune vif pour les éléments interactifs et clés */
 }
 
 .high-contrast .btn-primary {
     background-color: #ffff00 !important;
-    color: #000 !important;
-    border: 3px solid #fff !important;
-    font-weight: bold !important;
+    color: #000000 !important;
+    border: 3px solid #ffffff !important;
+    font-weight: 900 !important;
 }
 
 .high-contrast .btn-outline-secondary {
-    border: 2px solid #fff !important;
-    color: #fff !important;
+    border: 2px solid #ffffff !important;
+    color: #ffffff !important;
 }
 
 .high-contrast .form-check-input {
-    border: 2px solid #fff !important;
+    border: 2px solid #ffffff !important;
+    background-color: #000 !important;
 }
 
 .high-contrast .form-check-input:checked {
     background-color: #ffff00 !important;
+    border-color: #ffff00 !important;
 }
 
 .high-contrast .text-muted, 
 .high-contrast .text-danger, 
-.high-contrast label {
-    color: #fff !important;
+.high-contrast label,
+.high-contrast .form-check-label {
+    color: #ffffff !important;
 }
 
-/* --- STYLES DE BASE --- */
+.high-contrast .progress {
+    background-color: #444 !important;
+    border: 1px solid #fff;
+}
+
+/* --- MISE EN PAGE GÉNÉRALE --- */
 body { 
     min-height: 100vh; 
     background-color: var(--bg-body); 
@@ -74,9 +85,18 @@ body {
     padding: 20px 0; 
 }
 
-.main-wrapper { max-width: 950px; width: 100%; }
-.card { background-color: var(--bg-card) !important; border-radius: 24px; transition: 0.3s; }
+.main-wrapper { 
+    max-width: 950px; 
+    width: 100%; 
+}
 
+.card { 
+    background-color: var(--bg-card) !important; 
+    border-radius: 24px; 
+    transition: transform 0.2s ease;
+}
+
+/* Zone du mot de passe généré */
 .result-box { 
     background-color: var(--bg-result); 
     border: 1px solid var(--border); 
@@ -92,23 +112,47 @@ body {
     font-weight: bold;
     white-space: nowrap; 
     overflow-x: auto; 
-    scrollbar-width: none; 
+    scrollbar-width: none; /* Masque la barre de défilement sur Firefox */
     flex-grow: 1; 
 }
 
-.password-hidden { -webkit-text-security: disc; text-security: disc; }
-.accessibility-panel { background-color: var(--acc-bg); border: 1px solid var(--border); }
+#password-display::-webkit-scrollbar {
+    display: none; /* Masque la barre de défilement sur Chrome/Safari */
+}
 
+/* Masquage du mot de passe (œil) */
+.password-hidden { 
+    -webkit-text-security: disc; 
+    text-security: disc; 
+}
+
+/* Panneau d'accessibilité */
+.accessibility-panel { 
+    background-color: var(--acc-bg); 
+    border: 1px solid var(--border);
+}
+
+/* Éléments de l'historique */
 .history-item { 
     font-family: monospace; 
     cursor: pointer; 
-    padding: 12px 0; 
+    padding: 12px 10px; 
     border-bottom: 1px solid var(--border); 
     display: flex; 
     justify-content: space-between; 
+    align-items: center;
+    transition: background 0.2s;
 }
 
-/* Focus pour navigation clavier */
+.history-item:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+[data-bs-theme="dark"] .history-item:hover {
+    background-color: rgba(255,255,255,0.05);
+}
+
+/* Focus visuel pour la navigation au clavier */
 .using-keyboard *:focus {
     outline: 4px solid #0d6efd !important;
     outline-offset: 2px;
@@ -118,4 +162,8 @@ body {
     outline: 4px solid #ffff00 !important;
 }
 
-#qrcode img { margin: 0 auto; border: 4px solid white; }
+/* QR Code */
+#qrcode img { 
+    margin: 0 auto; 
+    border: 4px solid white; 
+}
