@@ -22,7 +22,7 @@ let fontSizeMultiplier = parseFloat(localStorage.getItem('fontSize')) || 1.0;
 let isHighContrast = localStorage.getItem('contrast') === 'true';
 let passwordHistory = [];
 
-// --- ACCESSIBILITÉ & PERSISTANCE ---
+// --- ACCESSIBILITÉ ---
 function applyFontSize() {
     document.documentElement.style.fontSize = (fontSizeMultiplier * 16) + 'px';
     localStorage.setItem('fontSize', fontSizeMultiplier);
@@ -38,7 +38,7 @@ document.getElementById('font-increase').onclick = () => { if(fontSizeMultiplier
 document.getElementById('font-decrease').onclick = () => { if(fontSizeMultiplier > 0.8) { fontSizeMultiplier -= 0.1; applyFontSize(); }};
 document.getElementById('contrast-toggle').onchange = (e) => { isHighContrast = e.target.checked; applyContrast(); };
 
-// --- UI & LANGUES ---
+// --- UI & THEME ---
 function updateUI() {
     const t = translations[currentLang];
     const ids = ['title', 'length', 'lowercase', 'uppercase', 'numbers', 'symbols', 'ambiguous', 'history', 'accessibility', 'textSize', 'contrast'];
@@ -51,7 +51,9 @@ function updateUI() {
     
     const currentPass = document.getElementById('password-display').innerText;
     if (!currentPass.includes('*')) updateStrength(currentPass);
-    renderHistory(); // Re-rend l'historique pour traduire le bouton "Vider"
+    
+    // Crucial : on relance le rendu de l'historique pour traduire le bouton "Vider"
+    renderHistory();
 }
 
 document.getElementById('lang-btn').onclick = () => {
@@ -71,11 +73,12 @@ document.getElementById('dark-mode-btn').onclick = () => {
     updateThemeIcon(newTheme);
 };
 
-// --- CORE LOGIC ---
+// --- CORE ---
 function renderHistory() {
     const list = document.getElementById('history-list');
     if (passwordHistory.length === 0) { list.innerHTML = ""; return; }
     
+    // Le bouton utilise maintenant dynamiquement translations[currentLang].clear
     list.innerHTML = passwordHistory.map(p => `
         <div class="history-item" onclick="navigator.clipboard.writeText('${p}')">
             <span class="text-truncate" style="max-width: 80%">${p}</span><i class="bi bi-copy"></i>
