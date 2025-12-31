@@ -1,66 +1,63 @@
 
 ---
 
-# 🛡️ Secure Password Generator
+# 🛡️ Professional Password Generator
 
-A modern, responsive, and multilingual web application to generate secure passwords. This tool allows users to customize their password criteria (length, numbers, symbols) and features a sleek **Dark Mode** interface.
+A modern, secure, and customizable password generator built with **HTML5**, **CSS3 (Variables)**, and **JavaScript (ES6)**. This version features a clean "flat" design using **Bootstrap 5**, multi-language support, and a dynamic Dark Mode.
+
+---
+
+## 📂 Project Structure
+
+To keep the code clean and maintainable, the project is divided into three main files:
+
+* **`index.html`**: Defines the layout and structure of the application.
+* **`style.css`**: Contains custom styling and Dark Mode theme variables.
+* **`script.js`**: Handles the randomization logic, translations, and theme switching.
 
 ---
 
 ## ✨ Features
 
-* **Customizable Length**: Choose a password length between 8 and 32 characters using a smooth slider.
-* **Character Sets**: Toggle the inclusion of **numbers** (`0-9`) and **symbols** (`!@#$%^&*`) to meet security requirements.
-* **Copy to Clipboard**: One-click copy functionality with visual feedback (icon change).
-* **Dark Mode**: A visual theme toggle (Light/Dark) to reduce eye strain, styled with custom CSS variables.
-* **Internationalization (i18n)**: Full support for **English** and **French** languages.
-* **Responsive Design**: Built with **Bootstrap 5**, ensuring it works perfectly on desktops, tablets, and smartphones.
+* **Custom Length**: Adjustable slider from 8 to 32 characters.
+* **Dynamic Charsets**: Toggle numbers and symbols on or off.
+* **Internationalization**: Instant toggle between **English** and **French**.
+* **Dark Mode**: Eye-friendly interface with a smooth color transition.
+* **One-Click Copy**: Copy your password to the clipboard with visual confirmation.
+* **Favicon**: A modern shield icon (🛡️) built directly into the HTML code.
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Technical Implementation
 
-| Technology | Purpose |
-| --- | --- |
-| **HTML5** | Structure and semantic layout. |
-| **CSS3** | Custom styling, animations, and Dark Mode variables. |
-| **JavaScript (ES6)** | Randomization logic, DOM manipulation, and translation system. |
-| **Bootstrap 5** | Responsive grid and modern UI components (Switches, Buttons). |
-| **Bootstrap Icons** | "Flat" vector iconography for a professional look. |
+### Logic Workflow
 
----
+The app uses a "pool" system to ensure security. Based on user selection, a string of available characters is built. The random index is calculated as follows:
 
-## 🚀 How it Works
+### Theme Management
 
-The generation logic uses the `Math.random()` function to pick characters from a dynamically built string based on user preferences:
+The Dark Mode is managed via CSS Custom Properties (Variables). When the `.dark-mode` class is toggled on the `<body>` tag, the colors update instantly:
 
-1. **Selection**: The script checks which checkboxes are active.
-2. **Pooling**: It creates a "pool" of available characters (Letters + Numbers + Symbols).
-3. **Looping**: A `for` loop runs for the duration of the selected length.
-4. **Randomizing**: For each iteration, a character is randomly selected from the pool using:
-
-
-5. **Output**: The resulting string is displayed in the UI.
+| Element | Light Mode | Dark Mode |
+| --- | --- | --- |
+| Background | `#f8f9fa` | `#121212` |
+| Card | `#ffffff` | `#1e1e1e` |
+| Text | `#212529` | `#f8f9fa` |
 
 ---
 
-## 📦 Installation & Usage
+## 🚀 Setup Instructions
 
-Since this is a client-side application, no server is required:
-
-1. Download the `pswd.html` file.
-2. Open the file in any modern web browser (Chrome, Firefox, Edge, Safari).
-3. Adjust your settings and click **Generate**.
-
----
-
-## 📝 License
-
-This project is open-source and free to use for educational or personal purposes.
+1. Create a new folder on your computer.
+2. Save the provided code into three separate files: `index.html`, `style.css`, and `script.js`.
+3. Ensure all three files are in the **same folder**.
+4. Open `index.html` in any web browser.
 
 ---
 
+## 📦 Dependencies
 
-* Add a **password strength meter** (Low/Medium/High)?
-* Show you how to **host this online** for free using GitHub Pages?
-* Add a feature to **generate multiple passwords** at once?
+* **Bootstrap 5 (CDN)**: For the responsive grid and modern components.
+* **Bootstrap Icons (CDN)**: For the flat vector iconography.
+
+---
