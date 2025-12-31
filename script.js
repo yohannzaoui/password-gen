@@ -4,7 +4,7 @@ const translations = {
         uppercase: "Majuscules (ABC)", numbers: "Chiffres (0-9)", symbols: "Symboles (@#$!)",
         ambiguous: "Exclure ambigus", btn: "Générer", history: "Historique", 
         error: "Option requise", clear: "Vider l'historique", crack: "Temps pour craquer : ",
-        accessibility: "Accessibilité", textSize: "Taille du texte", speak: "Lecture vocale",
+        accessibility: "Accessibilité", textSize: "Taille du texte",
         units: { sec: "sec", min: "min", hours: "heures", days: "jours", years: "ans", centuries: "Siècles 🛡️" }
     },
     en: { 
@@ -12,12 +12,11 @@ const translations = {
         uppercase: "Uppercase (ABC)", numbers: "Numbers (0-9)", symbols: "Symbols (@#$!)",
         ambiguous: "Exclude Ambiguous", btn: "Generate", history: "History", 
         error: "Option required", clear: "Clear History", crack: "Time to crack: ",
-        accessibility: "Accessibility", textSize: "Text Size", speak: "Voice read",
+        accessibility: "Accessibility", textSize: "Text Size",
         units: { sec: "sec", min: "min", hours: "hours", days: "days", years: "years", centuries: "Centuries 🛡️" }
     }
 };
 
-// --- INITIALISATION & SAUVEGARDE ---
 let currentLang = localStorage.getItem('lang') || 'fr';
 let fontSizeMultiplier = parseFloat(localStorage.getItem('fontSize')) || 1.0;
 let passwordHistory = [];
@@ -58,7 +57,6 @@ function updateUI() {
     document.getElementById('ui-history').innerText = t.history;
     document.getElementById('ui-accessibility').innerText = t.accessibility;
     document.getElementById('ui-text-size').innerText = t.textSize;
-    document.getElementById('speak-btn').title = t.speak;
     document.getElementById('lang-btn').innerText = currentLang === 'fr' ? 'EN' : 'FR';
     
     const currentPass = document.getElementById('password-display').innerText;
@@ -127,8 +125,8 @@ document.getElementById('generate-btn').onclick = () => {
     if (document.getElementById('symbols').checked) pool += "!@#$%^&*()_+";
     if (document.getElementById('exclude-ambiguous').checked) pool = pool.replace(/[ilLIoO01]/g, "");
 
+    const d = document.getElementById('password-display');
     if (!pool) {
-        const d = document.getElementById('password-display');
         d.innerText = translations[currentLang].error; d.classList.add('text-danger');
         return;
     }
@@ -136,7 +134,6 @@ document.getElementById('generate-btn').onclick = () => {
     let password = "";
     for (let i = 0; i < len; i++) password += pool.charAt(Math.floor(Math.random() * pool.length));
     
-    const d = document.getElementById('password-display');
     d.innerText = password; d.classList.remove('text-danger');
     d.style.fontSize = password.length > 24 ? "1rem" : "1.25rem";
     
@@ -150,17 +147,8 @@ document.getElementById('generate-btn').onclick = () => {
 document.getElementById('visibility-toggle').onclick = () => {
     isPasswordVisible = !isPasswordVisible;
     document.getElementById('password-display').classList.toggle('password-hidden');
-    document.querySelector('#visibility-toggle i').classList.toggle('bi-eye');
-    document.querySelector('#visibility-toggle i').classList.toggle('bi-eye-slash');
-};
-
-// Synthèse vocale
-document.getElementById('speak-btn').onclick = () => {
-    const p = document.getElementById('password-display').innerText;
-    if (p.includes('*') || !window.speechSynthesis) return;
-    const utter = new SpeechSynthesisUtterance(p.split('').join(' '));
-    utter.lang = currentLang === 'fr' ? 'fr-FR' : 'en-US';
-    window.speechSynthesis.speak(utter);
+    const icon = document.querySelector('#visibility-toggle i');
+    icon.classList.toggle('bi-eye'); icon.classList.toggle('bi-eye-slash');
 };
 
 document.getElementById('qr-toggle').onclick = () => document.getElementById('qr-container').classList.toggle('d-none');
