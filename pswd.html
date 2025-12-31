@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-color: #212529;
+            --bg-input: #e9ecef;
+        }
+
+        /* Variables quand la classe .dark-mode est sur le body */
+        body.dark-mode {
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-color: #f8f9fa;
+            --bg-input: #2d2d2d;
+        }
+
+        body {
+            background-color: var(--bg-body) !important;
+            color: var(--text-color) !important;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease;
+        }
+
+        .card {
+            background-color: var(--bg-card) !important;
+            color: var(--text-color) !important;
+            border: 1px solid rgba(125, 125, 125, 0.2);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .result-box {
+            background-color: var(--bg-input);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-link { color: var(--primary); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="card p-4 shadow">
+    <div class="d-flex justify-content-end gap-2 mb-3">
+        <button class="btn btn-sm btn-outline-secondary" id="lang-btn">EN</button>
+        <button class="btn btn-sm btn-outline-secondary" id="dark-mode-btn">
+            <i class="bi bi-moon-stars"></i>
+        </button>
+    </div>
+
+    <h2 class="h4 text-center mb-4" id="ui-title">Générateur de MDP</h2>
+
+    <div class="result-box mb-4">
+        <span id="password-display">********</span>
+        <button class="btn btn-link p-0" id="copy-btn">
+            <i class="bi bi-clipboard"></i>
+        </button>
+    </div>
+
+    <div class="mb-3">
+        <div class="d-flex justify-content-between">
+            <label id="ui-length">Longueur</label>
+            <b id="length-val">12</b>
+        </div>
+        <input type="range" class="form-range" id="length-slider" min="8" max="32" value="12">
+    </div>
+
+    <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" id="numbers" checked>
+        <label class="form-check-label" id="ui-numbers">Chiffres</label>
+    </div>
+
+    <div class="form-check form-switch mb-4">
+        <input class="form-check-input" type="checkbox" id="symbols" checked>
+        <label class="form-check-label" id="ui-symbols">Symboles</label>
+    </div>
+
+    <button class="btn btn-primary w-100 py-2" id="generate-btn">
+        <i class="bi bi-gear-fill me-2"></i><span id="ui-btn-text">Générer</span>
+    </button>
+</div>
+
+<script>
+    // 1. Traductions
+    const translations = {
+        fr: { title: "Générateur de MDP", length: "Longueur", numbers: "Chiffres (0-9)", symbols: "Symboles (@#$!)", btn: "Générer", alert: "Copié !" },
+        en: { title: "Password Generator", length: "Length", numbers: "Numbers (0-9)", symbols: "Symbols (@#$!)", btn: "Generate", alert: "Copied!" }
+    };
+
+    let lang = 'fr';
+
+    // 2. Éléments
+    const btnDark = document.getElementById('dark-mode-btn');
+    const btnLang = document.getElementById('lang-btn');
+    const btnGen = document.getElementById('generate-btn');
+    const btnCopy = document.getElementById('copy-btn');
+    const slider = document.getElementById('length-slider');
+    const display = document.getElementById('password-display');
+
+    // 3. Logique Mode Sombre
+    btnDark.onclick = () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        btnDark.innerHTML = isDark ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>';
+    };
+
+    // 4. Logique Traduction
+    btnLang.onclick = () => {
+        lang = (lang === 'fr') ? 'en' : 'fr';
+        btnLang.innerText = (lang === 'fr') ? 'EN' : 'FR';
+        
+        const t = translations[lang];
+        document.getElementById('ui-title').innerText = t.title;
+        document.getElementById('ui-length').innerText = t.length;
+        document.getElementById('ui-numbers').innerText = t.numbers;
+        document.getElementById('ui-symbols').innerText = t.symbols;
+        document.getElementById('ui-btn-text').innerText = t.btn;
+    };
+
+    // 5. Générateur
+    btnGen.onclick = () => {
+        let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if (document.getElementById('numbers').checked) chars += "0123456789";
+        if (document.getElementById('symbols').checked) chars += "!@#$%^&*()_+";
+        
+        let pass = "";
+        for (let i = 0; i < slider.value; i++) {
+            pass += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        display.innerText = pass;
+    };
+
+    // 6. Mise à jour longueur et copie
+    slider.oninput = () => document.getElementById('length-val').innerText = slider.value;
+
+    btnCopy.onclick = () => {
+        if (display.innerText === "********") return;
+        navigator.clipboard.writeText(display.innerText);
+        const icon = btnCopy.querySelector('i');
+        icon.classList.replace('bi-clipboard', 'bi-check-lg');
+        setTimeout(() => icon.classList.replace('bi-check-lg', 'bi-clipboard'), 1500);
+    };
+</script>
+</body>
+</html>
