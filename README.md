@@ -1,79 +1,83 @@
 
 ---
 
-# 🛡️ Password GEN - User Guide
+# 🛡️ Password GEN Pro - User Guide
 
-**Password GEN** is a modern and secure web application designed to generate robust passwords while providing a smooth, personalized user experience.
+**Password GEN Pro** is a cutting-edge web application dedicated to creating ultra-secure passwords. This version focuses on advanced customization and universal accessibility.
 
 ---
 
 ## 🚀 Key Features
 
-### 1. Customized Generation
+### 1. High-Precision Generation
 
-* **Variable Length:** Adjust your password length from **8 to 32 characters** using an intuitive slider.
-* **Character Options:** Choose to include lowercase, uppercase, numbers, and symbols.
-* **Enhanced Security:** An option to exclude ambiguous characters (such as `i, l, 1, L, o, 0, O`) to prevent reading errors.
-
-### 2. Security Analysis
-
-* **Strength Bar:** A color-coded progress bar visually indicates password robustness (Red = Weak, Yellow = Medium, Green = Strong).
-* **Crack Time Estimation:** The app calculates in real-time the estimated time required to brute-force your password (e.g., "300 years").
-
-### 3. Privacy and Ergonomics
-
-* **Mask Password:** Click the **Eye** icon to hide or reveal the generated password (useful in public spaces).
-* **History:** Keep track of the last 5 generated passwords. You can copy them with one click or clear the history for added security.
-* **QR Code:** Instantly generate a QR code to transfer your password to a mobile device without typing.
-
-### 4. Intelligent Personalization
-
-* **Dark / Light Mode:** Switch between themes based on your visual preference.
-* **Multilingual:** Full support for French and English.
-* **Automatic Memory:** The app uses local storage to remember your preferred language and theme for your next visit.
-
----
-
-## 🛠️ How to Use the App
-
-1. **Configure Settings:**
-* Use the slider to set the desired length.
-* Check or uncheck character types (Uppercase, Numbers, etc.).
+* **Length Control:** From **8 to 32 characters** to meet all security requirements.
+* **Character Details:** Clear visualization of included types:
+* Lowercase (`abc`)
+* Uppercase (`ABC`)
+* Numbers (`0-9`)
+* Symbols (`@#$!`)
 
 
-2. **Generate:**
-* Press the blue **"Generate"** button. The password appears immediately in the gray box.
+* **Anti-Error Protection:** Option to exclude ambiguous characters (`i, l, 1, L, o, 0, O`) that often cause confusion when reading or typing.
 
+### 2. Security & Real-Time Analysis
 
-3. **Check Strength:**
-* Look at the color bar and the estimated crack time below it to ensure the password is complex enough.
+* **Strength Indicator:** A dynamic progress bar changes color based on complexity.
+* **Crack Time Estimation:** Instantly calculates the time required to brute-force your password (from seconds to **Centuries 🛡️**).
+* **Privacy Mode:** Hide your password using the **Eye** icon to prevent shoulder surfing in public places.
 
+### 3. Advanced Accessibility (New 🌟)
 
-4. **Retrieve the Password:**
-* Click the **Clipboard** icon to copy the text.
-* OR click the **QR Code** icon to scan the password with your phone.
+The app now adapts to all user profiles:
 
+* **Text Scaling:** Adjust the interface size (`A-` / `A+`) for optimal reading comfort.
+* **High Contrast Mode:** A special mode for visually impaired users that toggles the interface to **Black, White, and Bright Yellow** for maximum legibility.
+* **Keyboard Navigation:** Full support for the `Tab` key with reinforced visual focus indicators.
 
-5. **Manage History:**
-* Your previous passwords appear on the right (or bottom on mobile). Click any of them to copy it again.
+### 4. Smart Experience & Memory
 
-
+* **Multilingual:** Switch between English and French with a single click.
+* **History:** Quick access to the last 5 generated passwords.
+* **QR Code:** Scan to instantly transfer the password to your smartphone.
+* **Automatic Saving:** The app remembers your language, theme (Dark/Light), text size, and contrast settings for your next visit.
 
 ---
 
-## 🔒 Security and Privacy
+## 🛠️ User Manual
 
-* **No Server Storage:** Your passwords are generated locally in your browser. Nothing is sent over the internet.
-* **LocalStorage:** Only your preferences (language and theme) are saved on your computer.
+1. **Initial Setup:**
+* Choose your language and theme at the top right.
+* Adjust the text size and contrast in the **Accessibility** panel if needed.
+
+
+2. **Password Configuration:**
+* Adjust the length using the slider.
+* Check the desired character types.
+
+
+3. **Generation & Validation:**
+* Click **"Generate"**.
+* Check the estimated crack time: we recommend a minimum of "several years."
+
+
+4. **Retrieval:**
+* Click **Copy** (clipboard icon) to use it elsewhere.
+* Use the **QR Code** for quick entry on a mobile device.
+
+
 
 ---
 
-## 💡 Tips for a Perfect Password
+## 🔒 Privacy
 
-For maximum security, we recommend:
+* **100% Local:** No passwords are ever stored on a server. Everything happens within your browser.
+* **Local Data:** Only your comfort preferences (theme, language, accessibility) are kept in your local storage.
 
-* A length of at least **14 characters**.
-* Activating all options (lowercase, uppercase, numbers, and symbols).
-* An estimated crack time of several **centuries**.
+---
+
+### 💡 Did you know?
+
+A **14-character** password mixing all types is exponentially harder to crack than a complex 10-character password. Length is your best defense!
 
 ---
