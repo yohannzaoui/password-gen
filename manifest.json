@@ -1,7 +1,7 @@
 {
   "short_name": "PassGen",
-  "name": "Password GEN Pro",
-  "description": "Générateur de mots de passe sécurisé et accessible.",
+  "name": "Password GEN",
+  "description": "Secure and accessible password generator.",
   "icons": [
   {
     "src": "img/favicon.png",
