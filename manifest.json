@@ -4,7 +4,7 @@
   "description": "Générateur de mots de passe sécurisé et accessible.",
   "icons": [
   {
-    "src": "img/ico.png",
+    "src": "img/favicon.png",
     "sizes": "512x512",
     "type": "image/png"
   }
