@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YCXNRZL3K"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5YCXNRZL3K');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password GEN</title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+    <meta name="author" content="Yohann Zaoui">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container main-wrapper">
+    <div class="row g-4 justify-content-center">
+        <div class="col-12 col-lg-7">
+            <div class="card p-4 shadow-lg border-0 h-100">
+                <div class="d-flex justify-content-end gap-2 mb-3">
+                    <button class="btn btn-sm btn-outline-secondary" id="lang-btn">EN</button>
+                    <button class="btn btn-sm btn-outline-secondary" id="dark-mode-btn">
+                        <i id="theme-icon" class="bi bi-moon-stars"></i>
+                    </button>
+                </div>
+
+                <h1 class="h4 text-center mb-4 fw-bold" id="ui-title">Password GEN</h1>
+
+                <div class="result-box mb-2">
+                    <span id="password-display" aria-live="polite">********</span>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-link p-0 text-decoration-none" id="visibility-toggle"><i id="eye-icon" class="bi bi-eye"></i></button>
+                        <button class="btn btn-link p-0 text-decoration-none" id="qr-toggle"><i class="bi bi-qr-code"></i></button>
+                        <button class="btn btn-link p-0 text-decoration-none" id="copy-btn"><i id="copy-icon" class="bi bi-clipboard"></i></button>
+                    </div>
+                </div>
+
+                <div id="qr-container" class="text-center mb-3 d-none">
+                    <div id="qrcode" class="d-inline-block p-2 bg-white rounded border"></div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="progress" style="height: 8px;">
+                        <div id="strength-bar" class="progress-bar" role="progressbar"></div>
+                    </div>
+                    <small id="crack-time-display" class="mt-1 d-block"></small>
+                </div>
+
+                <div class="btn-group w-100 mb-4" role="group">
+                    <input type="radio" class="btn-check" name="gen-mode" id="mode-password" checked>
+                    <label class="btn btn-outline-primary" for="mode-password" id="ui-mode-p">Mot de passe</label>
+                    <input type="radio" class="btn-check" name="gen-mode" id="mode-passphrase">
+                    <label class="btn btn-outline-primary" for="mode-passphrase" id="ui-mode-ph">Passphrase</label>
+                </div>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <label id="ui-length" class="fw-bold">Longueur / Mots</label>
+                        <span class="badge bg-primary rounded-pill" id="length-val">12</span>
+                    </div>
+                    <input type="range" class="form-range" id="length-slider" min="4" max="64" value="12">
+                </div>
+
+                <div id="options-panel">
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" id="lowercase" checked>
+                        <label class="form-check-label" id="ui-lowercase">Minuscules (abc)</label>
+                    </div>
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" id="uppercase" checked>
+                        <label class="form-check-label" id="ui-uppercase">Majuscules (ABC)</label>
+                    </div>
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" id="numbers" checked>
+                        <label class="form-check-label" id="ui-numbers">Chiffres (123)</label>
+                    </div>
+                    <div class="form-check form-switch mb-4">
+                        <input class="form-check-input" type="checkbox" id="symbols" checked>
+                        <label class="form-check-label" id="ui-symbols">Symboles (@#$)</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary w-100 py-3 fw-bold mt-auto" id="generate-btn">
+                    <i class="bi bi-shield-lock-fill me-2"></i><span id="ui-btn-text">Générer</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+            <div class="d-flex flex-column h-100 gap-4">
+                <div class="card p-4 shadow-lg border-0 flex-grow-1 overflow-hidden">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="small fw-bold m-0 section-label" id="ui-history">Historique</h6>
+                        <button class="btn btn-sm btn-outline-primary border-0" id="download-btn"><i class="bi bi-download"></i></button>
+                    </div>
+                    <div id="history-container">
+                        <div id="history-list"></div>
+                    </div>
+                </div>
+
+                <div class="card p-4 shadow-lg border-0">
+                    <label class="fw-bold mb-3 small text-uppercase section-label" id="ui-accessibility">Accessibilité</label>
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span id="ui-textSize" class="small">Taille du texte</span>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-outline-secondary" id="font-decrease">A-</button>
+                            <button class="btn btn-outline-secondary" id="font-increase">A+</button>
+                        </div>
+                    </div>
+                    <div class="form-check form-switch mb-0">
+                        <input class="form-check-input" type="checkbox" id="contrast-toggle">
+                        <label class="form-check-label small" id="ui-contrast" for="contrast-toggle">Contraste élevé</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
