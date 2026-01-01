@@ -82,10 +82,8 @@ A **14-character** password mixing all types is exponentially harder to crack th
 
 ---
 
-* DEMO https://bit.ly/4azeYIi
-<img width="200" height="258" alt="image" src="https://github.com/user-attachments/assets/12d17ef4-4473-411f-807b-048ddc368267" />
-
-
+* DEMO https://bit.ly/4q1JvDn
+<img width="200" height="200" alt="Qq118UGqZsFzp33" src="https://github.com/user-attachments/assets/2139d8ae-cd18-46ac-872b-b5864310305b" />
 
 ![image](https://github.com/user-attachments/assets/d2653a08-6fd2-47ca-9349-d6deda641cbb)
 ![image](https://github.com/user-attachments/assets/5b141e2c-95f7-4039-b2e9-1280e8a48371)
