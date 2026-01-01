@@ -1,280 +1,186 @@
 const translations = {
     fr: { 
-        title: "Password GEN", 
-        length: "Longueur", 
-        lowercase: "Minuscules (abc)",
-        uppercase: "Majuscules (ABC)", 
-        numbers: "Chiffres (0-9)", 
-        symbols: "Symboles (@#$!)",
-        ambiguous: "Exclure ambigus (i, l, 1, 0, o)", 
-        btn: "Générer", 
-        history: "Historique", 
-        error: "Option requise", 
-        clear: "Vider l'historique", 
-        crack: "Temps pour craquer : ",
-        accessibility: "Accessibilité", 
-        textSize: "Taille du texte", 
-        contrast: "Contraste élevé",
-        units: { sec: "sec", min: "min", hours: "heures", days: "jours", years: "ans", centuries: "Siècles 🛡️" }
+        title: "Password GEN", length: "Longueur / Mots", lowercase: "Minuscules (abc)", uppercase: "Majuscules (ABC)",
+        numbers: "Chiffres (123)", symbols: "Symboles (@#$)", btn: "Générer", history: "Historique", 
+        clear: "Vider l'historique", crack: "Temps pour craquer : ", accessibility: "Accessibilité", 
+        textSize: "Taille du texte", contrast: "Contraste élevé", modeP: "Mot de passe", modePh: "Passphrase",
+        units: { years: "ans", hours: "heures", centuries: "Siècles 🛡️", days: "jrs" }
     },
     en: { 
-        title: "Password GEN", 
-        length: "Length", 
-        lowercase: "Lowercase (abc)",
-        uppercase: "Uppercase (ABC)", 
-        numbers: "Numbers (0-9)", 
-        symbols: "Symbols (@#$!)",
-        ambiguous: "Exclude Ambiguous (i, l, 1, 0, o)", 
-        btn: "Generate", 
-        history: "History", 
-        error: "Option required", 
-        clear: "Clear History", 
-        crack: "Time to crack: ",
-        accessibility: "Accessibility", 
-        textSize: "Text Size", 
-        contrast: "High Contrast",
-        units: { sec: "sec", min: "min", hours: "hours", days: "days", years: "years", centuries: "Centuries 🛡️" }
+        title: "Password GEN", length: "Length / Words", lowercase: "Lowercase (abc)", uppercase: "Uppercase (ABC)",
+        numbers: "Numbers (123)", symbols: "Symbols (@#$)", btn: "Generate", history: "History", 
+        clear: "Clear History", crack: "Time to crack: ", accessibility: "Accessibility", 
+        textSize: "Text Size", contrast: "High Contrast", modeP: "Password", modePh: "Passphrase",
+        units: { years: "years", hours: "hours", centuries: "Centuries 🛡️", days: "days" }
     }
 };
 
-// --- ÉTAT INITIAL & STOCKAGE (LocalStorage) ---
 let currentLang = localStorage.getItem('lang') || 'fr';
 let fontSizeMultiplier = parseFloat(localStorage.getItem('fontSize')) || 1.0;
 let isHighContrast = localStorage.getItem('contrast') === 'true';
 let passwordHistory = [];
-let isPasswordVisible = true;
 
-// --- FONCTIONS D'ACCESSIBILITÉ ---
-
-// Appliquer la taille de la police
 function applyFontSize() {
     document.documentElement.style.fontSize = (fontSizeMultiplier * 16) + 'px';
     localStorage.setItem('fontSize', fontSizeMultiplier);
 }
 
-// Appliquer le mode contraste élevé
 function applyContrast() {
-    if (isHighContrast) {
-        document.body.classList.add('high-contrast');
-    } else {
-        document.body.classList.remove('high-contrast');
-    }
-    // Synchroniser l'état de la checkbox visuellement
+    isHighContrast ? document.body.classList.add('high-contrast') : document.body.classList.remove('high-contrast');
     document.getElementById('contrast-toggle').checked = isHighContrast;
     localStorage.setItem('contrast', isHighContrast);
 }
 
-// Événements pour les contrôles d'accessibilité
-document.getElementById('font-increase').onclick = () => { 
-    if(fontSizeMultiplier < 1.4) { 
-        fontSizeMultiplier += 0.1; 
-        applyFontSize(); 
-    }
-};
-
-document.getElementById('font-decrease').onclick = () => { 
-    if(fontSizeMultiplier > 0.8) { 
-        fontSizeMultiplier -= 0.1; 
-        applyFontSize(); 
-    }
-};
-
-document.getElementById('contrast-toggle').onchange = (e) => { 
-    isHighContrast = e.target.checked; 
-    applyContrast(); 
-};
-
-// --- GESTION DU THÈME & TRADUCTION ---
-
-const updateThemeIcon = (theme) => {
-    document.getElementById('theme-icon').className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
-};
-
-document.getElementById('dark-mode-btn').onclick = () => {
-    const newTheme = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-bs-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-};
-
-// Mise à jour de tous les textes de l'interface
 function updateUI() {
     const t = translations[currentLang];
-    
-    document.getElementById('ui-title').innerText = t.title;
-    document.getElementById('ui-length').innerText = t.length;
-    document.getElementById('ui-lowercase').innerText = t.lowercase;
-    document.getElementById('ui-uppercase').innerText = t.uppercase;
-    document.getElementById('ui-numbers').innerText = t.numbers;
-    document.getElementById('ui-symbols').innerText = t.symbols;
-    document.getElementById('ui-ambiguous').innerText = t.ambiguous;
+    const ids = ['title', 'length', 'lowercase', 'uppercase', 'numbers', 'symbols', 'history', 'accessibility', 'textSize', 'contrast'];
+    ids.forEach(id => { 
+        const el = document.getElementById(`ui-${id}`);
+        if (el) el.innerText = t[id]; 
+    });
     document.getElementById('ui-btn-text').innerText = t.btn;
-    document.getElementById('ui-history').innerText = t.history;
-    document.getElementById('ui-accessibility').innerText = t.accessibility;
-    document.getElementById('ui-text-size').innerText = t.textSize;
-    document.getElementById('ui-contrast').innerText = t.contrast;
-    
-    // Bouton de langue
+    document.getElementById('ui-mode-p').innerText = t.modeP;
+    document.getElementById('ui-mode-ph').innerText = t.modePh;
     document.getElementById('lang-btn').innerText = currentLang === 'fr' ? 'EN' : 'FR';
     
-    // Recalculer le temps de craquage si un mot de passe est affiché
     const currentPass = document.getElementById('password-display').innerText;
-    if (!currentPass.includes('*')) {
-        updateStrength(currentPass);
-    }
+    if(currentPass !== "********") updateStrength(currentPass);
     renderHistory();
 }
 
-document.getElementById('lang-btn').onclick = () => {
-    currentLang = currentLang === 'fr' ? 'en' : 'fr';
-    localStorage.setItem('lang', currentLang);
-    updateUI();
-};
+function generate() {
+    const isPassphrase = document.getElementById('mode-passphrase').checked;
+    const len = parseInt(document.getElementById('length-slider').value);
+    const useLower = document.getElementById('lowercase').checked;
+    const useUpper = document.getElementById('uppercase').checked;
+    const useNumbers = document.getElementById('numbers').checked;
+    const useSymbols = document.getElementById('symbols').checked;
+    let result = "";
 
-// --- LOGIQUE DU GÉNÉRATEUR ---
+    if (isPassphrase) {
+        const nbBlocks = 4;
+        const blockSize = Math.max(Math.floor(len / nbBlocks), 3);
+        let blocks = [];
+        let hasLetters = useLower || useUpper;
+        for (let i = 0; i < nbBlocks; i++) {
+            if (hasLetters) {
+                let word = "";
+                const v = "aeiouy", c = "bcdfghjklmnpqrstvwxz";
+                for (let j = 0; j < blockSize; j++) word += (j % 2 === 0) ? c[Math.floor(Math.random() * c.length)] : v[Math.floor(Math.random() * v.length)];
+                if (useUpper && !useLower) word = word.toUpperCase();
+                else if (useUpper && useLower && i === 0) word = word.charAt(0).toUpperCase() + word.slice(1);
+                blocks.push(word);
+            } else {
+                let pool = (useNumbers ? "0123456789" : "") + (useSymbols ? "!@#$%^&*()_+" : "");
+                let block = "";
+                for (let j = 0; j < blockSize; j++) block += pool[Math.floor(Math.random() * pool.length)];
+                blocks.push(block);
+            }
+        }
+        const sep = useSymbols && (hasLetters || useNumbers) ? "@" : "-";
+        result = blocks.join(sep);
+        if (hasLetters && useNumbers) result += Math.floor(Math.random() * 10);
+    } else {
+        let pool = (useLower ? "abcdefghijklmnopqrstuvwxyz" : "") + (useUpper ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "") + (useNumbers ? "0123456789" : "") + (useSymbols ? "!@#$%^&*()_+" : "");
+        if (!pool) return;
+        for (let i = 0; i < len; i++) result += pool.charAt(Math.floor(Math.random() * pool.length));
+    }
 
-function getTimeToCrack(p) {
-    let charsetSize = 0;
-    if (/[a-z]/.test(p)) charsetSize += 26;
-    if (/[A-Z]/.test(p)) charsetSize += 26;
-    if (/[0-9]/.test(p)) charsetSize += 10;
-    if (/[^A-Za-z0-9]/.test(p)) charsetSize += 32;
-
-    const combinations = Math.pow(charsetSize, p.length);
-    const seconds = combinations / 1e10; 
-    const u = translations[currentLang].units;
-
-    if (seconds < 1) return "< 1 " + u.sec;
-    if (seconds < 3600) return Math.floor(seconds / 60) + " " + u.min;
-    if (seconds < 86400) return Math.floor(seconds / 3600) + " " + u.hours;
-    if (seconds < 31536000) return Math.floor(seconds / 86400) + " " + u.days;
-    if (seconds < 31536000000) return Math.floor(seconds / 31536000) + " " + u.years;
-    return u.centuries;
+    document.getElementById('password-display').innerText = result;
+    document.getElementById("qrcode").innerHTML = "";
+    new QRCode(document.getElementById("qrcode"), { text: result, width: 128, height: 128 });
+    passwordHistory.unshift(result); if (passwordHistory.length > 10) passwordHistory.pop();
+    renderHistory();
+    updateStrength(result);
 }
 
 function updateStrength(p) {
     const bar = document.getElementById('strength-bar');
-    const crackDisplay = document.getElementById('crack-time-display');
-    
-    let s = p.length * 3;
-    if (/[A-Z]/.test(p)) s += 20;
-    if (/[0-9]/.test(p)) s += 20;
-    if (/[^A-Za-z0-9]/.test(p)) s += 25;
-    
-    s = Math.min(s, 100);
-    bar.style.width = s + "%";
-    bar.className = "progress-bar " + (s < 45 ? "bg-danger" : s < 80 ? "bg-warning" : "bg-success");
-    
-    if (crackDisplay) {
-        crackDisplay.innerText = translations[currentLang].crack + getTimeToCrack(p);
-    }
-}
-
-function renderHistory() {
-    const list = document.getElementById('history-list');
     const t = translations[currentLang];
-    
-    if (passwordHistory.length === 0) {
-        list.innerHTML = "";
-        return;
-    }
+    let poolSize = 0;
+    if (/[a-z]/.test(p)) poolSize += 26;
+    if (/[A-Z]/.test(p)) poolSize += 26;
+    if (/[0-9]/.test(p)) poolSize += 10;
+    if (/[^a-zA-Z0-9]/.test(p)) poolSize += 32;
 
-    list.innerHTML = passwordHistory.map(p => `
-        <div class="history-item" onclick="navigator.clipboard.writeText('${p}')">
-            <span class="text-truncate" style="max-width: 80%">${p}</span>
-            <i class="bi bi-copy"></i>
-        </div>
-    `).join('') + `<button class="btn btn-sm btn-link text-danger mt-3 p-0" id="clear-h">${t.clear}</button>`;
+    const entropy = p.length * Math.log2(poolSize || 1);
+    let strengthPercent = Math.min((entropy / 128) * 100, 100);
+    bar.style.width = strengthPercent + "%";
     
-    document.getElementById('clear-h').onclick = () => {
-        passwordHistory = [];
-        renderHistory();
-    };
+    if (entropy < 45) bar.className = "progress-bar bg-danger";
+    else if (entropy < 80) bar.className = "progress-bar bg-warning";
+    else bar.className = "progress-bar bg-success";
+
+    const secondsToCrack = Math.pow(poolSize || 1, p.length) / 1e11; 
+    let displayTime = "";
+    if (secondsToCrack < 1) displayTime = "< 1 sec";
+    else if (secondsToCrack < 3600) displayTime = `~${Math.round(secondsToCrack / 60)} min`;
+    else if (secondsToCrack < 86400) displayTime = `~${Math.round(secondsToCrack / 3600)} ${t.units.hours}`;
+    else if (secondsToCrack < 31536000) displayTime = `~${Math.round(secondsToCrack / 86400)} ${t.units.days}`;
+    else if (secondsToCrack < 3153600000) displayTime = `~${Math.round(secondsToCrack / 31536000)} ${t.units.years}`;
+    else displayTime = `100+ ${t.units.centuries}`;
+
+    document.getElementById('crack-time-display').innerText = t.crack + displayTime;
 }
 
-// --- ÉVÉNEMENTS DES BOUTONS ---
-
-document.getElementById('generate-btn').onclick = () => {
-    const len = document.getElementById('length-slider').value;
-    let pool = "";
-    if (document.getElementById('lowercase').checked) pool += "abcdefghijklmnopqrstuvwxyz";
-    if (document.getElementById('uppercase').checked) pool += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (document.getElementById('numbers').checked) pool += "0123456789";
-    if (document.getElementById('symbols').checked) pool += "!@#$%^&*()_+";
-
-    if (document.getElementById('exclude-ambiguous').checked) {
-        pool = pool.replace(/[ilLIoO01]/g, "");
-    }
-
-    const d = document.getElementById('password-display');
-    if (!pool) {
-        d.innerText = translations[currentLang].error;
-        d.classList.add('text-danger');
-        return;
-    }
-
-    let password = "";
-    for (let i = 0; i < len; i++) {
-        password += pool.charAt(Math.floor(Math.random() * pool.length));
-    }
-
-    d.innerText = password;
-    d.classList.remove('text-danger');
-    d.style.fontSize = password.length > 24 ? "1rem" : "1.25rem";
-    
-    // QR Code
-    document.getElementById("qrcode").innerHTML = "";
-    new QRCode(document.getElementById("qrcode"), { text: password, width: 128, height: 128 });
-
-    // Historique
-    passwordHistory.unshift(password);
-    if (passwordHistory.length > 5) passwordHistory.pop();
-    renderHistory();
-    updateStrength(password);
-};
-
-// Gérer l'affichage/masquage (œil)
-document.getElementById('visibility-toggle').onclick = () => {
-    isPasswordVisible = !isPasswordVisible;
-    document.getElementById('password-display').classList.toggle('password-hidden');
-    const icon = document.querySelector('#visibility-toggle i');
-    icon.classList.toggle('bi-eye');
-    icon.classList.toggle('bi-eye-slash');
-};
-
-document.getElementById('qr-toggle').onclick = () => document.getElementById('qr-container').classList.toggle('d-none');
-
-document.getElementById('length-slider').oninput = (e) => {
-    document.getElementById('length-val').innerText = e.target.value;
-};
-
+document.getElementById('generate-btn').onclick = generate;
 document.getElementById('copy-btn').onclick = () => {
-    const p = document.getElementById('password-display').innerText;
-    navigator.clipboard.writeText(p).then(() => {
-        const i = document.querySelector('#copy-btn i');
-        i.className = 'bi bi-check-lg text-success';
-        setTimeout(() => i.className = 'bi bi-clipboard', 1500);
+    const text = document.getElementById('password-display').innerText;
+    const icon = document.getElementById('copy-icon');
+    navigator.clipboard.writeText(text).then(() => {
+        icon.className = 'bi bi-check-lg ' + (isHighContrast ? '' : 'text-success');
+        setTimeout(() => icon.className = 'bi bi-clipboard', 2000);
     });
 };
 
-// --- INITIALISATION AU CHARGEMENT ---
-
-window.onload = () => {
-    applyFontSize();
-    applyContrast();
-    
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-bs-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-    
-    updateUI();
-    // Générer un premier mot de passe automatiquement
-    document.getElementById('generate-btn').click();
+document.getElementById('download-btn').onclick = () => {
+    if (!passwordHistory.length) return;
+    const content = `HISTORIQUE - ${new Date().toLocaleString()}\n\n` + passwordHistory.map((p, i) => `${i+1}. ${p}`).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([content], {type: 'text/plain'}));
+    a.download = 'passwords.txt';
+    a.click();
 };
 
-// Détection de la navigation au clavier pour l'accessibilité
-document.body.addEventListener('keydown', (e) => {
-    if (e.key === 'Tab') {
-        document.body.classList.add('using-keyboard');
-    }
-});
+document.getElementById('visibility-toggle').onclick = () => {
+    const display = document.getElementById('password-display'), icon = document.getElementById('eye-icon');
+    display.classList.toggle('password-hidden');
+    icon.classList.toggle('bi-eye'); icon.classList.toggle('bi-eye-slash');
+};
+
+document.getElementById('lang-btn').onclick = () => { currentLang = currentLang === 'fr' ? 'en' : 'fr'; localStorage.setItem('lang', currentLang); updateUI(); };
+document.getElementById('dark-mode-btn').onclick = () => {
+    const t = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-bs-theme', t);
+    localStorage.setItem('theme', t);
+    document.getElementById('theme-icon').className = t === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+};
+
+document.getElementById('font-increase').onclick = () => { if(fontSizeMultiplier < 1.4) { fontSizeMultiplier += 0.1; applyFontSize(); }};
+document.getElementById('font-decrease').onclick = () => { if(fontSizeMultiplier > 0.8) { fontSizeMultiplier -= 0.1; applyFontSize(); }};
+document.getElementById('contrast-toggle').onchange = (e) => { isHighContrast = e.target.checked; applyContrast(); };
+
+function renderHistory() {
+    const list = document.getElementById('history-list');
+    if (!list) return;
+    if (!passwordHistory.length) { list.innerHTML = ""; return; }
+    list.innerHTML = passwordHistory.map(p => `
+        <div class="history-item" onclick="navigator.clipboard.writeText('${p}')">
+            <span class="password-text">${p}</span>
+            <i class="bi bi-copy ms-2"></i>
+        </div>
+    `).join('') + 
+    `<button class="btn btn-sm btn-link text-danger mt-2 p-0" id="clear-h"><i class="bi bi-trash"></i> ${translations[currentLang].clear}</button>`;
+    document.getElementById('clear-h').onclick = () => { passwordHistory = []; renderHistory(); };
+}
+
+document.getElementById('qr-toggle').onclick = () => document.getElementById('qr-container').classList.toggle('d-none');
+document.getElementById('length-slider').oninput = (e) => document.getElementById('length-val').innerText = e.target.value;
+
+window.onload = () => {
+    applyFontSize(); applyContrast();
+    const st = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-bs-theme', st);
+    document.getElementById('theme-icon').className = st === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+    updateUI(); generate();
+};
