@@ -4,7 +4,7 @@
   "description": "Générateur de mots de passe sécurisé et accessible.",
   "icons": [
     {
-      "src": "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/icons/shield-lock-fill.svg",
+      "src": "img/ico.png",
       "type": "image/svg+xml",
       "sizes": "512x512",
       "purpose": "any maskable"
