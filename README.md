@@ -126,7 +126,7 @@ We are always looking for new ideas! Whether it's a new generation algorithm or 
 
 * **Vanilla JS**: Please avoid adding external libraries (like jQuery or React). We want to keep the app lightweight and fast.
 * **Accessibility**: Ensure that any UI changes are compatible with **High Contrast Mode** and font scaling.
-* **Documentation**: If you add a new feature, please update the `DOCUMENTATION.md` file accordingly.
+* **Documentation**: If you add a new feature, please update the `README.md` file accordingly.
 * **Code Style**: Keep the code clean, commented, and follow the existing naming conventions.
 
 ---
