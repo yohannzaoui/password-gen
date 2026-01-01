@@ -1,4 +1,4 @@
-The files are on the "prod" branch.
+
 ---
 
 # 📖 Technical Documentation - Password GEN
