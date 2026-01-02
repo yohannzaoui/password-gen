@@ -89,7 +89,7 @@ function generate() {
     document.getElementById('password-display').innerText = result;
     document.getElementById("qrcode").innerHTML = "";
     new QRCode(document.getElementById("qrcode"), { text: result, width: 128, height: 128 });
-    passwordHistory.unshift(result); if (passwordHistory.length > 10) passwordHistory.pop();
+    passwordHistory.unshift(result); if (passwordHistory.length > 5) passwordHistory.pop();
     renderHistory();
     updateStrength(result);
 }
