@@ -88,7 +88,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ---
 
-# 🤝 Contributing to Password GEN
+# 🤝 Contributing to Password Generator
 
 First off, thank you for considering contributing to **Password Generator**! It's people like you who make the open-source community such an amazing place to learn, inspire, and create.
 
