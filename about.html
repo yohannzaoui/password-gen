@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="light">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YCXNRZL3K"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5YCXNRZL3K');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Password GEN Pro</title>
+    <title>About - Password Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
@@ -37,7 +45,7 @@
                 </div>
 
                 <div class="text-center mb-5">
-                    <h1 class="h3 fw-bold" id="ui-aboutTitle">À Propos de Password GEN Pro</h1>
+                    <h1 class="h3 fw-bold" id="ui-aboutTitle">À Propos de Password Generator</h1>
                     <p class="text-muted" id="ui-subtitle">Un outil complet, sécurisé et accessible.</p>
                 </div>
 
@@ -102,7 +110,7 @@ SOFTWARE.
                 </div>
 
                 <div class="text-center mt-5">
-                    <p class="small text-muted mb-0" id="ui-footer">© 2026 Yohann Zaoui • Password GEN Pro</p>
+                    <p class="small text-muted mb-0" id="ui-footer">© 2026 Yohann Zaoui • Password Generator</p>
                 </div>
             </div>
         </div>
@@ -112,24 +120,24 @@ SOFTWARE.
 <script>
     const translations = {
         fr: {
-            back: "Retour", aboutTitle: "À Propos de Password GEN Pro", subtitle: "Un outil complet, sécurisé et accessible.",
+            back: "Retour", aboutTitle: "À Propos de Password Generator", subtitle: "Un outil complet, sécurisé et accessible.",
             f1t: "Sécurité Totale", f1p: "Génération locale via crypto.getRandomValues(). Rien ne transite par internet.",
             f2t: "Historique Local", f2p: "Accédez à vos 10 derniers mots de passe générés durant votre session.",
             f3t: "Transfert QR Code", f3p: "Scannez le QR Code pour transférer un mot de passe sur votre mobile.",
             f4t: "Exportation", f4p: "Téléchargez votre historique au format .txt pour une sauvegarde hors-ligne.",
             f5t: "Multi-langue", f5p: "Interface disponible en Français et Anglais avec sauvegarde automatique.",
             f6t: "Mode PWA", f6p: "Installez l'application pour un usage 100% hors-ligne.",
-            footer: "© 2026 Yohann Zaoui • Password GEN Pro"
+            footer: "© 2026 Yohann Zaoui • Password Generator"
         },
         en: {
-            back: "Back", aboutTitle: "About Password GEN Pro", subtitle: "A complete, secure, and accessible tool.",
+            back: "Back", aboutTitle: "About Password Generator", subtitle: "A complete, secure, and accessible tool.",
             f1t: "Total Security", f1p: "Local generation using crypto.getRandomValues(). No data ever leaves your device.",
             f2t: "Local History", f2p: "Access your last 10 generated passwords during your session.",
             f3t: "QR Code Transfer", f3p: "Scan the QR Code to instantly transfer a password to your mobile device.",
             f4t: "Export Data", f4p: "Download your history as a .txt file for offline backup.",
             f5t: "Multi-language", f5p: "Interface available in French and English with auto-save preferences.",
             f6t: "PWA Support", f6p: "Install the app on your desktop or mobile for 100% offline usage.",
-            footer: "© 2026 Yohann Zaoui • Password GEN Pro"
+            footer: "© 2026 Yohann Zaoui • Password Generator"
         }
     };
 
