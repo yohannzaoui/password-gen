@@ -1,6 +1,6 @@
 {
-  "short_name": "PassGen",
-  "name": "Password GEN",
+  "short_name": "PwdGen",
+  "name": "Password Generator",
   "description": "Secure and accessible password generator.",
   "icons": [
   {
@@ -13,6 +13,6 @@
   "display": "standalone",
   "theme_color": "#0d6efd",
   "background_color": "#ffffff",
-  "lang": "fr-FR",
+  "lang": "en-EN",
   "orientation": "portrait"
 }

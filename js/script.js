@@ -1,13 +1,13 @@
 const translations = {
     fr: { 
-        title: "Password GEN", length: "Longueur / Mots", lowercase: "Minuscules (abc)", uppercase: "Majuscules (ABC)",
+        title: "Password Generator", length: "Longueur / Mots", lowercase: "Minuscules (abc)", uppercase: "Majuscules (ABC)",
         numbers: "Chiffres (123)", symbols: "Symboles (@#$)", btn: "Générer", history: "Historique", 
         clear: "Vider l'historique", crack: "Temps pour craquer : ", accessibility: "Accessibilité", 
         textSize: "Taille du texte", contrast: "Contraste élevé", modeP: "Mot de passe", modePh: "Passphrase",
         units: { years: "ans", hours: "heures", centuries: "Siècles 🛡️", days: "jrs" }
     },
     en: { 
-        title: "Password GEN", length: "Length / Words", lowercase: "Lowercase (abc)", uppercase: "Uppercase (ABC)",
+        title: "Password Generator", length: "Length / Words", lowercase: "Lowercase (abc)", uppercase: "Uppercase (ABC)",
         numbers: "Numbers (123)", symbols: "Symbols (@#$)", btn: "Generate", history: "History", 
         clear: "Clear History", crack: "Time to crack: ", accessibility: "Accessibility", 
         textSize: "Text Size", contrast: "High Contrast", modeP: "Password", modePh: "Passphrase",
